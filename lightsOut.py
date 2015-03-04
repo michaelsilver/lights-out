@@ -17,31 +17,44 @@
 import numpy as np
 
 def main():
-    quit = False
+    quitMain = False
+    loopSetup = True
     
-    while(not quit):
+    while(loopSetup):
+        squareMatrixLength = input("Enter the length of the square board's edge: ")
+        if(squareMatrixLength < 2):
+            print "Invalid length; length must be > 2"
+            loopSetup = True
+        else:
+            loopSetup = False
+                               
+    while(not quitMain):
         # get the button number from user
         buttonNumber = input("Enter your button number (-1 to quit): ")
 
         # if 'q' is entered, quit
         if(buttonNumber == -1):
-            print("quitting...")
-            quit = True
-        elif(buttonNumber > -1 and buttonNumber < 25):
+            print "quitting..."
+            quitMain = True
+        elif(buttonNumber > -1 and buttonNumber < np.square(squareMatrixLength)):
             # check all the edge cases
-            if(not buttonNumber < 5):
-                print(buttonNumber-5)
+            # if not in north edge
+            if(not buttonNumber < squareMatrixLength):
+                print (buttonNumber - squareMatrixLength)
+                               
+            # if not in south edge
+            if(not buttonNumber > np.square(squareMatrixLength) - (squareMatrixLength+1)):
+                print (buttonNumber + squareMatrixLength)
 
-            if(not buttonNumber > 19):
-                print(buttonNumber+5)
+            # if not in west edge
+            if(buttonNumber % squareMatrixLength != 0):
+                print (buttonNumber - 1)
 
-            if(buttonNumber % 5 != 0):
-                print(buttonNumber-1)
-
-            if(buttonNumber % 5 != 4):
-                print(buttonNumber+1)
+            # if not in east edge
+            if(buttonNumber % squareMatrixLength != squareMatrixLength-1):
+                print (buttonNumber + 1)
         else:
-             print("Please enter a number between 0 and 24")
+             print "Please enter a number between 0 and", (np.square(squareMatrixLength)-1)
         
 main()                          # call the main function
 
