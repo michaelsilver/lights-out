@@ -21,14 +21,18 @@ def main():
     loopSetup = True
     
     while(loopSetup):
-        squareMatrixLength = input("Enter the length of the square board's edge: ")
-        if(squareMatrixLength < 2):
-            print "Invalid length; length must be > 2"
+        boardWidth = input("Enter the board width: ")
+        boardHeight = input("Enter the board height: ")
+        boardNumberOfButtons = boardWidth * boardHeight
+        
+        if(boardWidth < 2 or boardHeight < 2):
+            print "Invalid length; length and width must be at least 2"
+            # adjacencyMatrix = np.zeros((boardHeight, boardWidth))
             loopSetup = True
         else:
             loopSetup = False
                                
-    while(not quitMain):
+    while(not quitMain):        # for in in range(25):
         # get the button number from user
         buttonNumber = input("Enter your button number (-1 to quit): ")
 
@@ -36,25 +40,25 @@ def main():
         if(buttonNumber == -1):
             print "quitting..."
             quitMain = True
-        elif(buttonNumber > -1 and buttonNumber < np.square(squareMatrixLength)):
+        elif(buttonNumber > -1 and buttonNumber < boardNumberOfButtons):
             # check all the edge cases
             # if not in north edge
-            if(not buttonNumber < squareMatrixLength):
-                print (buttonNumber - squareMatrixLength)
+            if(not buttonNumber < boardHeight):
+                print (buttonNumber - boardWidth)
                                
             # if not in south edge
-            if(not buttonNumber > np.square(squareMatrixLength) - (squareMatrixLength+1)):
-                print (buttonNumber + squareMatrixLength)
+            if(not buttonNumber > boardNumberOfButtons - (boardWidth+1)):
+                print (buttonNumber + boardWidth)
 
             # if not in west edge
-            if(buttonNumber % squareMatrixLength != 0):
+            if(buttonNumber % boardWidth != 0):
                 print (buttonNumber - 1)
 
             # if not in east edge
-            if(buttonNumber % squareMatrixLength != squareMatrixLength-1):
+            if(buttonNumber % boardWidth != boardWidth-1):
                 print (buttonNumber + 1)
         else:
-             print "Please enter a number between 0 and", (np.square(squareMatrixLength)-1)
+             print "Please enter a number between 0 and", (boardNumberOfButtons-1)
         
 main()                          # call the main function
 
