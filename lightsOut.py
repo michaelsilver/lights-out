@@ -27,41 +27,56 @@ def main():
         
         if(boardWidth < 2 or boardHeight < 2):
             print "Invalid length; length and width must be at least 2"
-            # adjacencyMatrix = np.zeros((boardHeight, boardWidth))
             loopSetup = True
         else:
+            adjacencyMatrix = np.zeros((boardHeight, boardWidth))
             loopSetup = False
                                
-    while(not quitMain):        # for in in range(25):
+    # while(not quitMain):
+    
+    for buttonNumber in range(boardNumberOfButtons):
         # get the button number from user
-        buttonNumber = input("Enter your button number (-1 to quit): ")
+        # buttonNumber = input("Enter your button number (-1 to quit): ")
 
         # if 'q' is entered, quit
-        if(buttonNumber == -1):
-            print "quitting..."
-            quitMain = True
-        elif(buttonNumber > -1 and buttonNumber < boardNumberOfButtons):
-            # check all the edge cases
-            # if not in north edge
-            if(not buttonNumber < boardHeight):
-                print (buttonNumber - boardWidth)
-                               
-            # if not in south edge
-            if(not buttonNumber > boardNumberOfButtons - (boardWidth+1)):
-                print (buttonNumber + boardWidth)
+        # if(buttonNumber == -1):
+        #     print "quitting..."
+        #     quitMain = True
+        # elif(buttonNumber > -1 and buttonNumber < boardNumberOfButtons):
 
-            # if not in west edge
-            if(buttonNumber % boardWidth != 0):
-                print (buttonNumber - 1)
+        # check all the edge cases
+        # if not in north edge
+        if(not buttonNumber < boardWidth):
+            buttonToNorth = buttonNumber - boardWidth
+            setMatrixLocation(adjacencyMatrix, buttonToNorth, 1)
 
-            # if not in east edge
-            if(buttonNumber % boardWidth != boardWidth-1):
-                print (buttonNumber + 1)
-        else:
-             print "Please enter a number between 0 and", (boardNumberOfButtons-1)
+        # if not in south edge
+        if(not buttonNumber > boardNumberOfButtons - (boardWidth+1)):
+            buttonToSouth = buttonNumber + boardWidth
+            setMatrixLocation(adjacencyMatrix, buttonToSouth, 1)
+
+        # if not in west edge
+        if(buttonNumber % boardWidth != 0):
+            buttonToWest = buttonNumber - 1
+            setMatrixLocation(adjacencyMatrix, buttonToWest, 1)
+
+        # if not in east edge
+        if(buttonNumber % boardWidth != boardWidth-1):
+            buttonToEast = buttonNumber + 1
+            setMatrixLocation(adjacencyMatrix, buttonToEast, 1)
+            
+        # else:
+        #      print "Please enter a number between 0 and", (boardNumberOfButtons-1)
+
+    print adjacencyMatrix
         
 main()                          # call the main function
 
+# access and set a matrix by continuous indexing, starting at 0 (see ref 5x5 at bottom)
+def setMatrixLocation(matrix, location, value):
+    matrixWidth = matrix.shape[0]
+    matrix[location / matrixWidth, location % matrixWidth] = value
+              
 ## reference of 5x5 grid:
 
 # 0  1  2  3  4 
