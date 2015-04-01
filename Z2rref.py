@@ -9,7 +9,11 @@ March 2015
 import numpy as np
 
 # function to put any matrix in RREF    
-def Z2_rref(A, m, n):
+def Z2_rref(A):
+    # first get the dimentions of the matrix
+    m = A.shape[0]
+    n = A.shape[1]
+
     # we will step through all the rows and columns until we run out of one or the other
     r = 0 # the row index
     c = 0 # the column index
@@ -62,10 +66,10 @@ def Z2_rref(A, m, n):
 #     A = np.matrix([[0,0,1,1], [1,1,1,0], [1,1,0,1]])
     
 #     # getting the matrix dimensions
-#     m = A.shape[0]
-#     n = A.shape[1]
+#     # m = A.shape[0]
+#     # n = A.shape[1]
     
-#     [R, pvt, no_pvt] = Z2_rref(A, m, n)
+#     [R, pvt, no_pvt] = Z2_rref(A)
 #     print 'A=\n', A, '\n\n rref(A)=\n', R, '\n\n pivots=', pvt
 #     print '\n no_pivots=', no_pvt, '\n\n nullspace='
 
