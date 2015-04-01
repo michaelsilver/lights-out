@@ -15,6 +15,10 @@
 # repository's root directory.
 
 import numpy as np
+import Z2rref
+
+# say i is the initial board configuration, we are solving Ax = i, or (A|i). 
+# Using numpy, (A|i) would be np.hstack((A,i))
 
 # Works, but unusued
 # access and set a matrix by continuous indexing, starting at 0 (see ref 5x5 at bottom)
